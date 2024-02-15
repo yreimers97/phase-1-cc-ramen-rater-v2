@@ -1,53 +1,59 @@
 // index.js
 
 // Callbacks
-const handleClick = () => {
-   const img = document.createElement('img')
-  img.src = ramens.image
-  ramenMenu.appendChild(img)
-  img.addEventListener('click', () => {
-    displayRamens(ramens.target.ramen-menu.alt)
-  })
-};
+const handleClick = (food) => {
+  //const imageElement = document.getElementById('image')
+    //imageElement.src = food.image
+    //const nameElement = document.getElementById('name')
+    //nameElement.textContent = food.name
+    const ramenDetails = document.getElementById('ramen-details')
+    const ramenText = document.createElement('alt')
 
-const addSubmitListener = () => {
-  document.addEventListener('DOMContentLoaded', () => {
-  const form = document.querySelector('form')
-    form.document.addEventListener('submit',(event) => {
-    event.preventDefault()
-    buildRamen(event.target.ramen-menu.alt)
-    })
- })
+    //ramenDetails.textContent = food.
+  
+  // const foodDetails = document.getElementById('ramen-details')
+  // foodDetails.img = food.image
+  // const ramenName = document.createElement('name')
+  // ramenName.textContent = food.name
+ 
+   
+// })
 }
 
- 
+const addSubmitListener = () => {
+  // const newRamen = document.getElementById('new-ramen')
+  //   newRamen.addEventListener('submit', (event) => {
+  //       event.preventDefault()
+       
+}
 
-const displayRamens = (ramens) => {
-  fetch('http://localhost:3000/ramens/:id')
+const displayRamens = () => {
+  
+  fetch('http://localhost:3000/ramens')
   .then(response => response.json())
   .then(ramens => {
+    ramens.forEach(food => {
+      const myRestaurant = document.getElementById("ramen-menu")
+      const imgElement = document.createElement('img')
+      imgElement.src = food.image
+      myRestaurant.appendChild(imgElement)
 
-   
-    ramens.forEach((ramens) => {
-      displayRamens(ramens)
-      const newRamen = document.getElementById('ramen-menu')
-      newRamen
+      imgElement.addEventListener('click', () => {
+        handleClick(food)
+      })
     })
   })
-  const detailedImages = document.querySelector('detail-image')
-  detailedImages.class = ramens[0].images
-  const nameElement = document.querySelector('name')
-  nameElement.textContent = ramens[0].name
-  const displayElement = document.getElementsByClassName("restaurant")
-  displayElement.textContent = ramens[0].restaurant
 }
 
 const main = () => {
   // Invoke displayRamens here
-  displayRamens(ramens)
+  displayRamens()
   // Invoke addSubmitListener here
   addSubmitListener()
 }
+
+ //document.addEventListener('DOMContentLoaded', () => {
+ //})
 
 main()
 
